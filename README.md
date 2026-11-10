@@ -1,41 +1,116 @@
-# Landing page — Manu Valera
+# Manu Valera — Psicologia Infantil
 
-Landing page estática para a psicóloga infantil Manu Valera. O projeto foi feito com HTML, CSS e JavaScript sem framework para tornar os fundamentos fáceis de estudar.
+Landing page profissional desenvolvida para **Manu Valera**, psicóloga infantil em Uberlândia — MG, registrada no **CRP 04/76358**.
 
-## Estrutura
+O projeto apresenta o trabalho da profissional de maneira acolhedora, humanizada e acessível, combinando leveza infantil com a credibilidade de um atendimento psicológico especializado.
 
-- `dist/index.html`: conteúdo e estrutura semântica da página.
-- `dist/styles.css`: identidade visual, responsividade e animações.
-- `dist/script.js`: menu, entrada dos elementos e efeito de profundidade.
-- `dist/assets/`: logo e fotografias.
-- `.openai/hosting.json`: configuração de publicação do Site.
+## Objetivo da página
 
-## Conceitos para estudar
+A landing page foi criada para:
 
-1. **HTML semântico:** observe o uso de `header`, `nav`, `main`, `section`, `article`, `details` e `footer`.
-2. **Design tokens:** as variáveis no início do CSS concentram cores, medidas e sombras.
-3. **Layout responsivo:** Grid organiza as seções e as media queries adaptam o conteúdo a telas menores.
-4. **Progressive enhancement:** o conteúdo funciona sem JavaScript; o script apenas melhora a experiência.
-5. **Acessibilidade:** há link de salto, textos alternativos, estados ARIA e suporte a movimento reduzido.
-6. **Efeito 3D leve:** `perspective`, `rotateX` e `rotateY` criam profundidade sem biblioteca externa.
-7. **Animação ligada à rolagem:** a seção de brinquedos calcula o progresso da rolagem, interpola posições com JavaScript e mantém os elementos visuais em CSS.
+- apresentar a Manu e sua formação profissional;
+- comunicar seus serviços de forma clara e responsável;
+- transmitir acolhimento às crianças, adolescentes e suas famílias;
+- destacar o atendimento relacionado ao desenvolvimento infantil, ABA, autismo e neurodiversidade;
+- orientar pais e cuidadores sobre o funcionamento do acompanhamento;
+- facilitar o contato e o agendamento de uma conversa pelo WhatsApp.
 
-## Testar localmente
+O público principal são pais, mães e responsáveis por crianças e adolescentes de até 16 anos, em Uberlândia e região, que procuram acompanhamento psicológico infantil, orientação parental ou suporte especializado.
 
-Abra `dist/index.html` no navegador ou sirva a pasta `dist` com um servidor estático de sua preferência.
+## Serviços apresentados
+
+- Psicologia infantil;
+- intervenção baseada em Análise do Comportamento Aplicada — ABA;
+- acompanhamento em autismo e neurodiversidade;
+- orientação para pais e cuidadores;
+- atendimentos presenciais e on-line, definidos conforme as necessidades da criança.
+
+## Experiência e identidade visual
+
+A interface utiliza a identidade da Manu, com rosa, verde-menta, off-white e detalhes em tons pastel. Fotografias reais e formas orgânicas reforçam proximidade, confiança e acolhimento.
+
+Entre os recursos da página estão:
+
+- layout responsivo para computadores, tablets e celulares;
+- navegação semântica e acessível;
+- botão flutuante e chamadas para contato pelo WhatsApp;
+- mensagem de contato preenchida automaticamente;
+- apresentação profissional, serviços, processo de atendimento e perguntas frequentes;
+- animações de entrada durante a rolagem;
+- cartões com perspectiva e profundidade;
+- seção interativa com brinquedos que se organizam conforme a rolagem;
+- suporte à preferência do sistema por movimento reduzido.
+
+## Tecnologias utilizadas
+
+- **HTML5:** estrutura semântica, conteúdo e acessibilidade;
+- **CSS3:** identidade visual, responsividade, ilustrações, transições e efeitos 3D;
+- **JavaScript:** menu, animações, observação da rolagem e interações com o cursor;
+- **Git e GitHub:** versionamento e hospedagem do código-fonte;
+- **Vercel:** publicação e futuras atualizações automáticas a partir da branch `main`;
+- **OpenAI Sites:** prototipação e primeira publicação do projeto.
+
+O projeto não utiliza framework ou biblioteca de animação. Os efeitos foram construídos com CSS e JavaScript puro para manter a página leve e tornar o código mais fácil de estudar.
+
+## Estrutura do projeto
+
+```text
+Portfólio Manu/
+├── dist/
+│   ├── assets/              # Logo e fotografias
+│   ├── index.html           # Estrutura e conteúdo da página
+│   ├── script.js            # Interações e animações
+│   └── styles.css           # Estilos, responsividade e elementos visuais
+├── .gitignore               # Arquivos ignorados pelo Git
+├── README.md                # Documentação do projeto
+└── vercel.json              # Configuração de publicação na Vercel
+```
+
+## Executar localmente
+
+Por ser um site estático, você pode abrir `dist/index.html` diretamente no navegador.
+
+Para utilizar um servidor local:
+
+```powershell
+python -m http.server 4173 --directory dist
+```
+
+Depois, acesse:
+
+```text
+http://localhost:4173
+```
 
 ## Publicação na Vercel
 
-O arquivo `vercel.json` informa à Vercel que os arquivos públicos estão em `dist`. Como o projeto usa HTML, CSS e JavaScript puro, não existe uma etapa de compilação.
+O arquivo `vercel.json` define `dist` como a pasta pública. Na importação do repositório pela Vercel, utilize:
 
-Depois que o repositório estiver no GitHub, conecte-o à Vercel com estas opções:
+- **Framework Preset:** Other;
+- **Build Command:** vazio;
+- **Output Directory:** `dist`.
 
-- Framework Preset: `Other`
-- Build Command: vazio
-- Output Directory: `dist`
+Após a integração com o GitHub, novos commits enviados para a branch `main` podem gerar atualizações automáticas da página.
 
-Após a integração, cada novo `git push` na branch `main` pode gerar uma nova publicação automaticamente.
+## Site publicado
 
-## Primeiro exercício
+[Acessar a landing page da Manu Valera](https://manu-valera-psicologia.barcelona-fla.chatgpt.site/)
 
-No arquivo `styles.css`, altere os valores de `--pink` e `--mint` dentro de `:root`. Depois acompanhe como essas duas variáveis atualizam toda a interface.
+## Aprendizados do projeto
+
+Este projeto também foi desenvolvido como exercício prático de programação, abordando:
+
+- HTML semântico;
+- variáveis e organização de CSS;
+- Flexbox e CSS Grid;
+- responsividade com media queries;
+- manipulação do DOM;
+- `IntersectionObserver`;
+- animações ligadas à rolagem;
+- perspectiva com `transform`, `rotateX` e `rotateY`;
+- acessibilidade e `prefers-reduced-motion`;
+- fluxo de trabalho com Git, GitHub e deploy contínuo.
+
+---
+
+Desenvolvido para **Manu Valera — Psicologia Infantil**.
