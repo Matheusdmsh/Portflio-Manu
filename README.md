@@ -24,6 +24,18 @@ Landing page estática para a psicóloga infantil Manu Valera. O projeto foi fei
 
 Abra `dist/index.html` no navegador ou sirva a pasta `dist` com um servidor estático de sua preferência.
 
+## Publicação na Vercel
+
+O arquivo `vercel.json` informa à Vercel que os arquivos públicos estão em `dist`. Como o projeto usa HTML, CSS e JavaScript puro, não existe uma etapa de compilação.
+
+Depois que o repositório estiver no GitHub, conecte-o à Vercel com estas opções:
+
+- Framework Preset: `Other`
+- Build Command: vazio
+- Output Directory: `dist`
+
+Após a integração, cada novo `git push` na branch `main` pode gerar uma nova publicação automaticamente.
+
 ## Primeiro exercício
 
 No arquivo `styles.css`, altere os valores de `--pink` e `--mint` dentro de `:root`. Depois acompanhe como essas duas variáveis atualizam toda a interface.

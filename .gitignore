@@ -1,0 +1,9 @@
+# Dependências locais
+node_modules/
+
+# Configuração local criada pela Vercel CLI
+.vercel/
+
+# Pacotes temporários de publicação
+*.tar.gz
+
