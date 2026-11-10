@@ -2,6 +2,7 @@ const header = document.querySelector('[data-header]');
 const menuButton = document.querySelector('.menu-button');
 const menu = document.querySelector('.main-nav');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 function updateHeader() {
   header?.classList.toggle('scrolled', window.scrollY > 24);
@@ -47,6 +48,7 @@ const playProgress = document.querySelector('[data-play-progress]');
 let playPointerX = 0;
 let playPointerY = 0;
 let playFrame = null;
+let playViewportWidth = window.innerWidth;
 
 const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
 const mix = (from, to, progress) => from + (to - from) * progress;
@@ -94,25 +96,32 @@ function requestPlayUpdate() {
   playFrame = requestAnimationFrame(updatePlayScene);
 }
 
-playStage?.addEventListener('pointermove', (event) => {
-  if (reduceMotion) return;
-  const bounds = playStage.getBoundingClientRect();
-  playPointerX = (event.clientX - bounds.left) / bounds.width - .5;
-  playPointerY = (event.clientY - bounds.top) / bounds.height - .5;
-  requestPlayUpdate();
-});
+if (finePointer && !reduceMotion) {
+  playStage?.addEventListener('pointermove', (event) => {
+    const bounds = playStage.getBoundingClientRect();
+    playPointerX = (event.clientX - bounds.left) / bounds.width - .5;
+    playPointerY = (event.clientY - bounds.top) / bounds.height - .5;
+    requestPlayUpdate();
+  });
 
-playStage?.addEventListener('pointerleave', () => {
-  playPointerX = 0;
-  playPointerY = 0;
-  requestPlayUpdate();
-});
+  playStage?.addEventListener('pointerleave', () => {
+    playPointerX = 0;
+    playPointerY = 0;
+    requestPlayUpdate();
+  });
+}
 
 window.addEventListener('scroll', requestPlayUpdate, { passive: true });
-window.addEventListener('resize', requestPlayUpdate);
+window.addEventListener('resize', () => {
+  const nextWidth = window.innerWidth;
+  if (Math.abs(nextWidth - playViewportWidth) < 4) return;
+  playViewportWidth = nextWidth;
+  requestPlayUpdate();
+});
+window.addEventListener('orientationchange', requestPlayUpdate);
 requestPlayUpdate();
 
-if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+if (!reduceMotion && finePointer) {
   document.querySelectorAll('[data-tilt]').forEach((card) => {
     const strength = Number(card.dataset.tiltStrength || 4);
 
