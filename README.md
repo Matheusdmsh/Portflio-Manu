@@ -15,7 +15,7 @@ A landing page foi criada para:
 - orientar pais e cuidadores sobre o funcionamento do acompanhamento;
 - facilitar o contato e o agendamento de uma conversa pelo WhatsApp.
 
-O público principal são pais, mães e responsáveis por crianças e adolescentes de até 16 anos, em Uberlândia e região, que procuram acompanhamento psicológico infantil, orientação parental ou suporte especializado.
+O público principal são pais, mães e responsáveis por crianças e adolescentes de 2 a 16 anos, em Uberlândia e região, que procuram acompanhamento psicológico infantil, orientação parental ou suporte especializado.
 
 ## Serviços apresentados
 
@@ -23,7 +23,7 @@ O público principal são pais, mães e responsáveis por crianças e adolescent
 - intervenção baseada em Análise do Comportamento Aplicada — ABA;
 - acompanhamento em autismo e neurodiversidade;
 - orientação para pais e cuidadores;
-- atendimentos presenciais e on-line, definidos conforme as necessidades da criança.
+- atendimentos presenciais e on-line, definidos conforme a possibilidade e em conversa com a família.
 
 ## Experiência e identidade visual
 
