@@ -186,7 +186,9 @@ p { color: var(--muted); }
 .about-grid { display: grid; grid-template-columns: .88fr 1fr; align-items: center; gap: clamp(60px, 10vw, 140px); }
 .about-visual { position: relative; }
 .about-photo { height: 720px; border-radius: 220px 220px 30px 30px; }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 53% 55%; }
+.about-photo img, .about-photo video { width: 100%; height: 100%; object-fit: cover; object-position: 53% 55%; }
+.about-photo video { display: block; background: #eee8e1; }
+.room-label { position: absolute; top: 28px; left: 28px; z-index: 2; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.86); backdrop-filter: blur(12px); color: var(--ink); font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 12px 30px rgba(34,34,34,.12); }
 .about-badge { position: absolute; right: -38px; bottom: 42px; display: flex; align-items: center; justify-content: center; gap: 9px; width: max-content; max-width: calc(100% - 24px); min-height: 50px; padding: 14px 20px; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; background: var(--pink); box-shadow: 0 16px 38px rgba(201,44,98,.25); color: white; text-transform: uppercase; white-space: nowrap; font-size: .58rem; letter-spacing: .1em; animation: float 5s ease-in-out infinite; }
 .about-badge b { color: var(--yellow); }
 .about-copy h2 { margin-bottom: 30px; }

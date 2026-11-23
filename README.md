@@ -1,6 +1,6 @@
-# Manu Valera — Psicologia Infantil
+# Manu Valera | Psicologia Infantil
 
-Landing page profissional desenvolvida para **Manu Valera**, psicóloga infantil em Uberlândia — MG, registrada no **CRP 04/76358**.
+Landing page profissional desenvolvida para **Manu Valera**, psicóloga infantil em Uberlândia, MG, registrada no **CRP 04/76358**.
 
 O projeto apresenta o trabalho da profissional de maneira acolhedora, humanizada e acessível, combinando leveza infantil com a credibilidade de um atendimento psicológico especializado.
 
@@ -20,7 +20,7 @@ O público principal são pais, mães e responsáveis por crianças e adolescent
 ## Serviços apresentados
 
 - Psicologia infantil;
-- intervenção baseada em Análise do Comportamento Aplicada — ABA;
+- intervenção baseada em Análise do Comportamento Aplicada (ABA);
 - acompanhamento em autismo e neurodiversidade;
 - orientação para pais e cuidadores;
 - atendimentos presenciais e on-line, definidos conforme a possibilidade e em conversa com a família.
@@ -113,4 +113,4 @@ Este projeto também foi desenvolvido como exercício prático de programação,
 
 ---
 
-Desenvolvido para **Manu Valera — Psicologia Infantil**.
+Desenvolvido para **Manu Valera | Psicologia Infantil**.
