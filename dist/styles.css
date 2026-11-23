@@ -202,7 +202,9 @@ p { color: var(--muted); }
 .process .section-number { color: #ff78a5; border-color: rgba(255,255,255,.2); }
 .process h2 { color: white; }
 .process p { color: rgba(255,255,255,.64); }
+.process-intro { display: grid; grid-template-columns: .88fr 1fr; align-items: center; gap: clamp(60px, 10vw, 140px); margin-bottom: 70px; }
 .process-heading { max-width: 750px; margin-bottom: 70px; }
+.process-intro .process-heading { margin-bottom: 0; }
 .process-heading > p:last-child { max-width: 550px; }
 .process-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid rgba(255,255,255,.14); }
 .process-list li { display: grid; grid-template-columns: 100px 1fr; padding: 36px 0; border-bottom: 1px solid rgba(255,255,255,.14); transition: padding .3s ease, background .3s ease; }
@@ -285,7 +287,7 @@ p { color: var(--muted); }
   .main-nav.open { display: flex; flex-direction: column; align-items: stretch; }
   .main-nav > a:not(.button) { display: block; padding: 8px 0; }
   .hero { min-height: auto; padding-top: 137px; }
-  .hero-grid, .welcome-grid, .about-grid, .faq-grid, .contact-card { grid-template-columns: 1fr; }
+  .hero-grid, .welcome-grid, .about-grid, .process-intro, .faq-grid, .contact-card { grid-template-columns: 1fr; }
   .hero h1 { font-size: clamp(2.7rem, 11.5vw, 3.6rem); }
   .hero-visual { margin-top: 20px; width: calc(100% - 16px); }
   .hero-photo { min-height: 560px; height: 75vh; height: 75svh; }

@@ -3,7 +3,7 @@ const menuButton = document.querySelector('.menu-button');
 const menu = document.querySelector('.main-nav');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const roomVideo = document.querySelector('.about-video video');
+const roomVideo = document.querySelector('.room-video video');
 
 if (reduceMotion && roomVideo) {
   roomVideo.removeAttribute('autoplay');
