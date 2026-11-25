@@ -4,6 +4,7 @@ const menu = document.querySelector('.main-nav');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const roomVideo = document.querySelector('.room-video video');
+const roomVideoPlayButton = document.querySelector('[data-room-video-play]');
 const cookieBanner = document.querySelector('[data-cookie-banner]');
 const privacyDialog = document.querySelector('[data-privacy-dialog]');
 const cookieConsentKey = 'manu-cookie-consent-v1';
@@ -103,10 +104,32 @@ if (savedCookieConsent === 'accepted') {
   showCookieBanner();
 }
 
-if (reduceMotion && roomVideo) {
-  roomVideo.removeAttribute('autoplay');
-  roomVideo.pause();
+function attemptRoomVideoPlayback() {
+  if (!roomVideo) return;
+
+  roomVideo.muted = true;
+  roomVideo.defaultMuted = true;
+  roomVideo.playsInline = true;
+
+  const playback = roomVideo.play();
+  if (!playback || typeof playback.then !== 'function') return;
+
+  playback
+    .then(() => {
+      if (roomVideoPlayButton) roomVideoPlayButton.hidden = true;
+    })
+    .catch(() => {
+      if (roomVideoPlayButton) roomVideoPlayButton.hidden = false;
+    });
 }
+
+roomVideo?.addEventListener('canplay', attemptRoomVideoPlayback, { once: true });
+window.addEventListener('pageshow', attemptRoomVideoPlayback);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) attemptRoomVideoPlayback();
+});
+roomVideoPlayButton?.addEventListener('click', attemptRoomVideoPlayback);
+attemptRoomVideoPlayback();
 
 function updateHeader() {
   header?.classList.toggle('scrolled', window.scrollY > 24);
