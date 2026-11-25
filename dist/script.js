@@ -4,7 +4,6 @@ const menu = document.querySelector('.main-nav');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const roomVideo = document.querySelector('.room-video video');
-const roomVideoPlayButton = document.querySelector('[data-room-video-play]');
 const cookieBanner = document.querySelector('[data-cookie-banner]');
 const privacyDialog = document.querySelector('[data-privacy-dialog]');
 const cookieConsentKey = 'manu-cookie-consent-v1';
@@ -110,17 +109,14 @@ function attemptRoomVideoPlayback() {
   roomVideo.muted = true;
   roomVideo.defaultMuted = true;
   roomVideo.playsInline = true;
+  roomVideo.loop = true;
 
   const playback = roomVideo.play();
   if (!playback || typeof playback.then !== 'function') return;
 
-  playback
-    .then(() => {
-      if (roomVideoPlayButton) roomVideoPlayButton.hidden = true;
-    })
-    .catch(() => {
-      if (roomVideoPlayButton) roomVideoPlayButton.hidden = false;
-    });
+  playback.catch(() => {
+    // Alguns celulares bloqueiam autoplay até a primeira interação do visitante.
+  });
 }
 
 roomVideo?.addEventListener('canplay', attemptRoomVideoPlayback, { once: true });
@@ -128,7 +124,18 @@ window.addEventListener('pageshow', attemptRoomVideoPlayback);
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden) attemptRoomVideoPlayback();
 });
-roomVideoPlayButton?.addEventListener('click', attemptRoomVideoPlayback);
+document.addEventListener('touchstart', attemptRoomVideoPlayback, { once: true, passive: true });
+document.addEventListener('pointerdown', attemptRoomVideoPlayback, { once: true, passive: true });
+window.addEventListener('scroll', attemptRoomVideoPlayback, { once: true, passive: true });
+
+if (roomVideo) {
+  const roomVideoObserver = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) attemptRoomVideoPlayback();
+  }, { threshold: 0.2 });
+
+  roomVideoObserver.observe(roomVideo);
+}
+
 attemptRoomVideoPlayback();
 
 function updateHeader() {
