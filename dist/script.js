@@ -4,6 +4,104 @@ const menu = document.querySelector('.main-nav');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const roomVideo = document.querySelector('.room-video video');
+const cookieBanner = document.querySelector('[data-cookie-banner]');
+const privacyDialog = document.querySelector('[data-privacy-dialog]');
+const cookieConsentKey = 'manu-cookie-consent-v1';
+const clarityProjectId = 'zic27zktav';
+
+function readCookieConsent() {
+  try {
+    return window.localStorage.getItem(cookieConsentKey);
+  } catch {
+    return null;
+  }
+}
+
+function saveCookieConsent(value) {
+  try {
+    window.localStorage.setItem(cookieConsentKey, value);
+  } catch {
+    // The choice remains valid for the current page if storage is unavailable.
+  }
+}
+
+function prepareClarity() {
+  window.clarity = window.clarity || function () {
+    (window.clarity.q = window.clarity.q || []).push(arguments);
+  };
+}
+
+function setClarityConsent(analyticsStorage) {
+  prepareClarity();
+  window.clarity('consentv2', {
+    ad_Storage: 'denied',
+    analytics_Storage: analyticsStorage
+  });
+}
+
+function loadClarity() {
+  setClarityConsent('granted');
+  if (document.querySelector('[data-clarity-script]')) return;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.clarity.ms/tag/${clarityProjectId}`;
+  script.dataset.clarityScript = '';
+  document.head.appendChild(script);
+}
+
+function rejectClarity() {
+  if (typeof window.clarity === 'function') {
+    setClarityConsent('denied');
+    window.clarity('consent', false);
+  }
+
+  ['_clck', '_clsk'].forEach((name) => {
+    document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+  });
+}
+
+function hideCookieBanner() {
+  if (cookieBanner) cookieBanner.hidden = true;
+}
+
+function showCookieBanner() {
+  if (cookieBanner) cookieBanner.hidden = false;
+}
+
+document.querySelectorAll('[data-accept-cookies]').forEach((button) => {
+  button.addEventListener('click', () => {
+    saveCookieConsent('accepted');
+    loadClarity();
+    hideCookieBanner();
+  });
+});
+
+document.querySelectorAll('[data-reject-cookies]').forEach((button) => {
+  button.addEventListener('click', () => {
+    saveCookieConsent('rejected');
+    rejectClarity();
+    hideCookieBanner();
+  });
+});
+
+document.querySelectorAll('[data-open-privacy]').forEach((button) => {
+  button.addEventListener('click', () => privacyDialog?.showModal());
+});
+
+document.querySelectorAll('[data-cookie-settings]').forEach((button) => {
+  button.addEventListener('click', () => {
+    privacyDialog?.close();
+    showCookieBanner();
+  });
+});
+
+const savedCookieConsent = readCookieConsent();
+if (savedCookieConsent === 'accepted') {
+  loadClarity();
+} else if (savedCookieConsent !== 'rejected') {
+  showCookieBanner();
+}
 
 if (reduceMotion && roomVideo) {
   roomVideo.removeAttribute('autoplay');
@@ -73,7 +171,8 @@ function updatePlayScene() {
 
   playToys.forEach((toy) => {
     const fromX = Number(toy.dataset.fromX);
-    const fromY = Number(toy.dataset.fromY);
+    const mobileArchOffset = window.innerWidth <= 800 && toy.classList.contains('toy-arch') ? .52 : 0;
+    const fromY = Number(toy.dataset.fromY) + mobileArchOffset;
     const toX = Number(toy.dataset.toX);
     const toY = Number(toy.dataset.toY);
     const fromRotation = Number(toy.dataset.fromR);
